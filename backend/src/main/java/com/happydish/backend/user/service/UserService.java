@@ -5,6 +5,7 @@ import com.happydish.backend.user.model.User;
 import com.happydish.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
     public ResponseEntity<?> save(SignupRequestDto requestDto) {
@@ -22,7 +24,7 @@ public class UserService {
         User user = User.builder()
                         .email(requestDto.getEmail())
                         .name(requestDto.getName())
-                        .password(requestDto.getPassword())
+                        .password(bCryptPasswordEncoder.encode(requestDto.getPassword()))
                         .build();
 
         userRepository.save(user);
