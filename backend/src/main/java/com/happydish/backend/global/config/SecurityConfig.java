@@ -1,4 +1,4 @@
-package com.happydish.backend.config;
+package com.happydish.backend.global.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;

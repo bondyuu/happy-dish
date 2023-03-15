@@ -1,5 +1,7 @@
-package com.happydish.backend.user;
+package com.happydish.backend.user.controller;
 
+import com.happydish.backend.user.dto.SignupRequestDto;
+import com.happydish.backend.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

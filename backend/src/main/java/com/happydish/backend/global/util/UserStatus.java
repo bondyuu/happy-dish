@@ -1,4 +1,4 @@
-package com.happydish.backend.user;
+package com.happydish.backend.global.util;
 
 import lombok.Getter;
 
