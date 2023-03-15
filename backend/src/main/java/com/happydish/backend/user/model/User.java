@@ -4,12 +4,14 @@ import com.happydish.backend.global.util.Role;
 import com.happydish.backend.global.util.UserStatus;
 import com.sun.istack.NotNull;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity(name = "users")
 @NoArgsConstructor
+@Getter
 public class User {
 
     @Id

@@ -18,8 +18,13 @@ public class PrincipleDetailsService implements UserDetailsService {
     //리턴되는 PrincipleDetails -> Authentication -> session
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("----------------------------");
         System.out.println(username);
+        System.out.println("----------------------------");
         Optional<User> userEntity = userRepository.findByEmail(username);
-        return userEntity.map(PrincipleDetails::new).orElse(null);
+        if(userEntity.isPresent()){
+            return new PrincipleDetails(userEntity.get());
+        }
+        return null;
     }
 }
