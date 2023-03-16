@@ -29,4 +29,10 @@ public class UserController {
                                   @AuthenticationPrincipal PrincipleDetails principleDetails) throws IOException {
         return userService.edit(requestDto, multipartFile, principleDetails);
     }
+
+    @PostMapping("/{userId}/delete")
+    public ResponseEntity<?> delete(@PathVariable(name = "userId") long id,
+                                    @AuthenticationPrincipal PrincipleDetails principleDetails) {
+        return userService.delete(id, principleDetails);
+    }
 }

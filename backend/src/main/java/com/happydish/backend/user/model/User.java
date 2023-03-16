@@ -64,4 +64,20 @@ public class User {
     public void editPassword(String password) {
         this.password = password;
     }
+
+    public boolean canNotControl(User target) {
+        return target.getId() != this.id && !this.role.equals(Role.ROLE_ADMIN);
+    }
+
+    public boolean isAdmin() {
+        return this.role.equals(Role.ROLE_ADMIN);
+    }
+
+    public void deletedBy(Role role) {
+        if (role.equals(Role.ROLE_ADMIN)) {
+            this.status = UserStatus.BANNED;
+        } else {
+            this.status = UserStatus.DELETED;
+        }
+    }
 }

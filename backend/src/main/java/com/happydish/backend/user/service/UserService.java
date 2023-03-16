@@ -4,9 +4,11 @@ import com.happydish.backend.global.auth.PrincipleDetails;
 import com.happydish.backend.global.util.S3Uploader;
 import com.happydish.backend.user.dto.EditRequestDto;
 import com.happydish.backend.user.dto.SignupRequestDto;
+import com.happydish.backend.user.model.Role;
 import com.happydish.backend.user.model.User;
 import com.happydish.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.expression.spel.ast.OpAnd;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -55,5 +58,27 @@ public class UserService {
         }
 
         return ResponseEntity.ok(loginUser);
+    }
+
+    @Transactional
+    public ResponseEntity<?> delete(long id, PrincipleDetails principleDetails) {
+        User loginUser = principleDetails.getUser();
+
+        Optional<User> optionalTargetUser = userRepository.findById(id);
+        if (optionalTargetUser.isEmpty()) {
+            return ResponseEntity.badRequest().body("Target Not Found");
+        }
+        User targetUser = optionalTargetUser.get();
+
+        if (loginUser.canNotControl(targetUser)) {
+            return ResponseEntity.badRequest().body("LoginUser Not Permitted");
+        }
+
+        if (loginUser.isAdmin()) {
+            loginUser.deletedBy(Role.ROLE_ADMIN);
+        }
+        loginUser.deletedBy(Role.ROLE_USER);
+
+        return ResponseEntity.ok("SUCCESS");
     }
 }
