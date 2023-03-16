@@ -1,7 +1,5 @@
 package com.happydish.backend.user.model;
 
-import com.happydish.backend.global.util.Role;
-import com.happydish.backend.global.util.UserStatus;
 import com.sun.istack.NotNull;
 import lombok.Builder;
 import lombok.Getter;
