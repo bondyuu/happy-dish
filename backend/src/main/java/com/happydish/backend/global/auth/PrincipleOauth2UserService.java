@@ -3,6 +3,7 @@ package com.happydish.backend.global.auth;
 import com.happydish.backend.user.model.User;
 import com.happydish.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -16,8 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PrincipleOauth2UserService extends DefaultOAuth2UserService {
 
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     // 구글로부터 받은 userRequest 데이터에 대한 후처리되는 함수
     @Override
@@ -30,7 +30,7 @@ public class PrincipleOauth2UserService extends DefaultOAuth2UserService {
         String providerId = oAuth2User.getAttribute("sub");
         String email = oAuth2User.getAttribute("email");
         String username = provider + "_" + providerId; // google_1234
-        String password = bCryptPasswordEncoder.encode("게인데어");
+        String password = "@#$*892743q#$984sdfhsdf)#@$*(sdf";
 
         Optional<User> userEntity = userRepository.findByEmail(email);
 
