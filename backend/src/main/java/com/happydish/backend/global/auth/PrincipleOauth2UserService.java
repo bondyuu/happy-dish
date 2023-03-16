@@ -1,9 +1,8 @@
 package com.happydish.backend.global.auth;
 
-import com.happydish.backend.global.util.Role;
 import com.happydish.backend.user.model.User;
 import com.happydish.backend.user.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -14,12 +13,10 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class PrincipleOauth2UserService extends DefaultOAuth2UserService {
 
-    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
     private UserRepository userRepository;
 
     // 구글로부터 받은 userRequest 데이터에 대한 후처리되는 함수
