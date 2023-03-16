@@ -25,6 +25,7 @@ public class UserService {
                         .email(requestDto.getEmail())
                         .name(requestDto.getName())
                         .password(bCryptPasswordEncoder.encode(requestDto.getPassword()))
+                        .profileUrl("https://bondyu.s3.ap-northeast-2.amazonaws.com/static/user/aa690dcd-eb44-46a6-843e-22b530b98918asdf.jpg")
                         .build();
 
         userRepository.save(user);

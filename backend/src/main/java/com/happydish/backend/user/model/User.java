@@ -42,8 +42,11 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 
+    @Column
+    private String profileUrl;
+
     @Builder
-    public User(String email, String name, String password, String provider, String providerId) {
+    public User(String email, String name, String password, String provider, String providerId, String profileUrl) {
         this.email = email;
         this.name = name;
         this.password = password;
@@ -51,5 +54,6 @@ public class User {
         this.providerId = providerId;
         this.role = Role.ROLE_USER;
         this.status = UserStatus.ACTIVE;
+        this.profileUrl = profileUrl;
     }
 }
