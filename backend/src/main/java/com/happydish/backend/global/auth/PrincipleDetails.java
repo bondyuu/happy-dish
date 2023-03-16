@@ -1,6 +1,7 @@
 package com.happydish.backend.global.auth;
 
 import com.happydish.backend.user.model.User;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
+@Data
 public class PrincipleDetails implements UserDetails, OAuth2User {
     private User user; //콤포지션
     private Map<String, Object> attributes;

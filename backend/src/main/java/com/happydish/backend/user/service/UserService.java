@@ -1,5 +1,8 @@
 package com.happydish.backend.user.service;
 
+import com.happydish.backend.global.auth.PrincipleDetails;
+import com.happydish.backend.global.util.S3Uploader;
+import com.happydish.backend.user.dto.EditRequestDto;
 import com.happydish.backend.user.dto.SignupRequestDto;
 import com.happydish.backend.user.model.User;
 import com.happydish.backend.user.repository.UserRepository;
@@ -8,10 +11,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
+    private final S3Uploader s3Uploader;
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -30,5 +37,23 @@ public class UserService {
 
         userRepository.save(user);
         return ResponseEntity.ok("ok");
+    }
+
+    @Transactional
+    public ResponseEntity<?> edit(EditRequestDto requestDto,
+                                  MultipartFile multipartFile,
+                                  PrincipleDetails principleDetails) throws IOException {
+        User loginUser = principleDetails.getUser();
+
+        if (!multipartFile.isEmpty()) {
+            String url = s3Uploader.uploadFiles(multipartFile,"static/user");
+            loginUser.editImage(url);
+        }
+
+        if (!requestDto.getPassword().isEmpty()) {
+            loginUser.editPassword(bCryptPasswordEncoder.encode(requestDto.getPassword()));
+        }
+
+        return ResponseEntity.ok(loginUser);
     }
 }

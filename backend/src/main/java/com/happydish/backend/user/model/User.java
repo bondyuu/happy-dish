@@ -56,4 +56,12 @@ public class User {
         this.status = UserStatus.ACTIVE;
         this.profileUrl = profileUrl;
     }
+
+    public void editImage(String url) {
+        this.profileUrl = url;
+    }
+
+    public void editPassword(String password) {
+        this.password = password;
+    }
 }
