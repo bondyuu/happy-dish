@@ -1,7 +1,10 @@
 package com.happydish.backend.post.model;
 
 import com.happydish.backend.global.util.Timestamped;
+import com.happydish.backend.post.dto.PostDto;
 import com.happydish.backend.user.model.User;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
 @NoArgsConstructor
 public class Post extends Timestamped {
     @Id
@@ -29,4 +33,23 @@ public class Post extends Timestamped {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", orphanRemoval = true)
     private List<Heart> heartList = new ArrayList<>();
 
+    @Builder
+    public Post(String title, String content,User user, String url) {
+        this.title = title;
+        this.content = content;
+        this.user = user;
+        this.status = PostStatus.ACTIVE;
+        this.imageUrl = url;
+    }
+
+    public PostDto toPostDto() {
+        return PostDto.builder()
+                .title(this.title)
+                .content(this.content)
+                .author(this.user.toUserDto())
+                .status(this.status.toString())
+                .imageUrl(this.imageUrl)
+                .heartNum(this.heartList.size())
+                .build();
+    }
 }

@@ -2,6 +2,7 @@ package com.happydish.backend.user.model;
 
 import com.happydish.backend.global.util.Timestamped;
 import com.happydish.backend.post.model.Heart;
+import com.happydish.backend.user.dto.UserDto;
 import com.sun.istack.NotNull;
 import lombok.Builder;
 import lombok.Getter;
@@ -86,5 +87,9 @@ public class User extends Timestamped {
         } else {
             this.status = UserStatus.DELETED;
         }
+    }
+
+    public UserDto toUserDto() {
+        return UserDto.builder().email(this.email).name(this.name).profileUrl(this.profileUrl).build();
     }
 }
