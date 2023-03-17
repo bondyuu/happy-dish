@@ -1,16 +1,20 @@
 package com.happydish.backend.user.model;
 
+import com.happydish.backend.global.util.Timestamped;
+import com.happydish.backend.post.model.Heart;
 import com.sun.istack.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "users")
 @NoArgsConstructor
 @Getter
-public class User {
+public class User extends Timestamped {
 
     @Id
     @GeneratedValue
@@ -44,6 +48,9 @@ public class User {
 
     @Column
     private String profileUrl;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", orphanRemoval = true)
+    private List<Heart> heartList = new ArrayList<>();
 
     @Builder
     public User(String email, String name, String password, String provider, String providerId, String profileUrl) {
