@@ -4,8 +4,10 @@ import com.happydish.backend.global.auth.PrincipleDetails;
 import com.happydish.backend.global.util.S3Uploader;
 import com.happydish.backend.post.dto.SaveRequestDto;
 import com.happydish.backend.post.model.Post;
+import com.happydish.backend.post.model.PostStatus;
 import com.happydish.backend.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,4 +32,12 @@ public class PostService {
 
         return ResponseEntity.ok(post.toPostDto());
     }
+
+    public ResponseEntity<?> search(String title, Pageable pageable) {
+        if (title.equals("")) {
+            return ResponseEntity.ok(postRepository.findAllByStatus(PostStatus.ACTIVE, pageable).map(Post::toPostDto));
+        }
+        return ResponseEntity.ok(postRepository.findAllByTitleContainingAndStatus(title, PostStatus.ACTIVE, pageable).map(Post::toPostDto));
+    }
+
 }

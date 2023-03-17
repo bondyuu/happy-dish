@@ -4,12 +4,12 @@ import com.happydish.backend.global.auth.PrincipleDetails;
 import com.happydish.backend.post.dto.SaveRequestDto;
 import com.happydish.backend.post.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -25,5 +25,11 @@ public class PostController {
                                   @RequestPart(value = "image")MultipartFile multipartFile,
                                   @AuthenticationPrincipal PrincipleDetails principleDetails) throws IOException {
         return postService.save(requestDto, multipartFile, principleDetails);
+    }
+
+    @GetMapping()
+    public ResponseEntity<?> search(@RequestParam String title,
+                                    @PageableDefault(sort = "createdAt",direction = Sort.Direction.DESC)Pageable pageable) {
+        return postService.search(title, pageable);
     }
 }
