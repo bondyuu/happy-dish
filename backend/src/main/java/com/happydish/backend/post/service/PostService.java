@@ -2,6 +2,7 @@ package com.happydish.backend.post.service;
 
 import com.happydish.backend.global.auth.PrincipleDetails;
 import com.happydish.backend.global.util.S3Uploader;
+import com.happydish.backend.post.dto.EditRequestDto;
 import com.happydish.backend.post.dto.SaveRequestDto;
 import com.happydish.backend.post.model.Post;
 import com.happydish.backend.post.model.PostStatus;
@@ -62,5 +63,28 @@ public class PostService {
         post.deletedBy(loginUser.getRole());
 
         return ResponseEntity.ok("SUCCESS");
+    }
+
+    @Transactional
+    public ResponseEntity<?> edit(long id, EditRequestDto requestDto,MultipartFile multipartFile, PrincipleDetails principleDetails) throws IOException{
+        Optional<Post> optionalPost = postRepository.findById(id);
+        if (optionalPost.isEmpty()) {
+            return ResponseEntity.badRequest().body("Post Not Found");
+        }
+        Post post = optionalPost.get();
+        User loginUser = principleDetails.getUser();
+
+        if (!post.getUser().equals(loginUser)) {
+            return ResponseEntity.badRequest().body("Not Permitted");
+        }
+
+        if (!multipartFile.isEmpty()) {
+            String url = s3Uploader.uploadFiles(multipartFile, "/static/posts");
+            requestDto.setImageUrl(url);
+        }
+
+        post.edit(requestDto);
+
+        return ResponseEntity.ok(post.toPostDto());
     }
 }

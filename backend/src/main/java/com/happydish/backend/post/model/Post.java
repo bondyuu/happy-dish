@@ -1,6 +1,7 @@
 package com.happydish.backend.post.model;
 
 import com.happydish.backend.global.util.Timestamped;
+import com.happydish.backend.post.dto.EditRequestDto;
 import com.happydish.backend.post.dto.PostDto;
 import com.happydish.backend.user.model.Role;
 import com.happydish.backend.user.model.User;
@@ -48,6 +49,14 @@ public class Post extends Timestamped {
             this.status = PostStatus.ADMIN_DELETED;
         } else {
             this.status = PostStatus.USER_DELETED;
+        }
+    }
+
+    public void edit(EditRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+        if (!requestDto.getImageUrl().equals("")) {
+            this.imageUrl = requestDto.getImageUrl();
         }
     }
 

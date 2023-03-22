@@ -1,6 +1,7 @@
 package com.happydish.backend.post.controller;
 
 import com.happydish.backend.global.auth.PrincipleDetails;
+import com.happydish.backend.post.dto.EditRequestDto;
 import com.happydish.backend.post.dto.SaveRequestDto;
 import com.happydish.backend.post.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -37,5 +38,13 @@ public class PostController {
     public ResponseEntity<?> delete(@PathVariable(name = "postId") long id,
                                     @AuthenticationPrincipal PrincipleDetails principleDetails) {
         return postService.delete(id, principleDetails);
+    }
+
+    @PostMapping("/{postId}/edit")
+    public ResponseEntity<?> edit(@PathVariable(name = "postId") long id,
+                                  @RequestPart(value = "requestDto") EditRequestDto requestDto,
+                                  @RequestPart(value = "image") MultipartFile multipartFile,
+                                  @AuthenticationPrincipal PrincipleDetails principleDetails) throws IOException{
+        return postService.edit(id, requestDto, multipartFile, principleDetails);
     }
 }
