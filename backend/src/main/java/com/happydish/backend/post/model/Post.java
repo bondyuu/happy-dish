@@ -2,6 +2,7 @@ package com.happydish.backend.post.model;
 
 import com.happydish.backend.global.util.Timestamped;
 import com.happydish.backend.post.dto.PostDto;
+import com.happydish.backend.user.model.Role;
 import com.happydish.backend.user.model.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -40,6 +41,14 @@ public class Post extends Timestamped {
         this.user = user;
         this.status = PostStatus.ACTIVE;
         this.imageUrl = url;
+    }
+
+    public void deletedBy(Role role) {
+        if (role.equals(Role.ROLE_ADMIN)) {
+            this.status = PostStatus.ADMIN_DELETED;
+        } else {
+            this.status = PostStatus.USER_DELETED;
+        }
     }
 
     public PostDto toPostDto() {

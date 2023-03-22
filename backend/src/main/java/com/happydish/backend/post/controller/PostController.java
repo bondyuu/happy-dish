@@ -32,4 +32,10 @@ public class PostController {
                                     @PageableDefault(sort = "createdAt",direction = Sort.Direction.DESC)Pageable pageable) {
         return postService.search(title, pageable);
     }
+
+    @PostMapping("/{postId}/delete")
+    public ResponseEntity<?> delete(@PathVariable(name = "postId") long id,
+                                    @AuthenticationPrincipal PrincipleDetails principleDetails) {
+        return postService.delete(id, principleDetails);
+    }
 }
