@@ -10,6 +10,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RestController
@@ -17,6 +19,11 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+
+    @GetMapping("/loginsuccess")
+    private ResponseEntity<?> success(HttpServletRequest request, HttpServletResponse response) {
+        return ResponseEntity.ok("SUCCESS");
+    }
 
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody SignupRequestDto requestDto) {
