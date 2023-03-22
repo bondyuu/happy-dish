@@ -74,9 +74,6 @@ public class UserService {
             return ResponseEntity.badRequest().body("LoginUser Not Permitted");
         }
 
-        if (loginUser.isAdmin()) {
-            loginUser.deletedBy(Role.ROLE_ADMIN);
-        }
         loginUser.deletedBy(Role.ROLE_USER);
 
         return ResponseEntity.ok("SUCCESS");
