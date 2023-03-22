@@ -1,7 +1,6 @@
 package com.happydish.backend.global.config;
 
 import com.happydish.backend.global.auth.PrincipleOauth2UserService;
-import com.happydish.backend.global.util.CustomLoginSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
