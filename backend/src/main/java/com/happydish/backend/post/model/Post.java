@@ -1,8 +1,8 @@
 package com.happydish.backend.post.model;
 
 import com.happydish.backend.global.util.Timestamped;
-import com.happydish.backend.post.dto.EditRequestDto;
-import com.happydish.backend.post.dto.PostDto;
+import com.happydish.backend.post.dto.post.EditRequestDto;
+import com.happydish.backend.post.dto.post.PostDto;
 import com.happydish.backend.user.model.Role;
 import com.happydish.backend.user.model.User;
 import lombok.Builder;
@@ -29,26 +29,28 @@ public class Post extends Timestamped {
     private User user;
     @Column
     @Enumerated(EnumType.STRING)
-    private PostStatus status;
+    private Status status;
     @Column
     private String imageUrl;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", orphanRemoval = true)
     private List<Heart> heartList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", orphanRemoval = true)
+    private List<Comment> commentList = new ArrayList<>();
 
     @Builder
     public Post(String title, String content,User user, String url) {
         this.title = title;
         this.content = content;
         this.user = user;
-        this.status = PostStatus.ACTIVE;
+        this.status = Status.ACTIVE;
         this.imageUrl = url;
     }
 
     public void deletedBy(Role role) {
         if (role.equals(Role.ROLE_ADMIN)) {
-            this.status = PostStatus.ADMIN_DELETED;
+            this.status = Status.ADMIN_DELETED;
         } else {
-            this.status = PostStatus.USER_DELETED;
+            this.status = Status.USER_DELETED;
         }
     }
 

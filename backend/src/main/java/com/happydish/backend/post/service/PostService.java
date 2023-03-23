@@ -2,12 +2,14 @@ package com.happydish.backend.post.service;
 
 import com.happydish.backend.global.auth.PrincipleDetails;
 import com.happydish.backend.global.util.S3Uploader;
-import com.happydish.backend.post.dto.EditRequestDto;
-import com.happydish.backend.post.dto.SaveRequestDto;
+import com.happydish.backend.post.dto.comment.CommentRequestDto;
+import com.happydish.backend.post.dto.post.EditRequestDto;
+import com.happydish.backend.post.dto.post.SaveRequestDto;
+import com.happydish.backend.post.model.Comment;
 import com.happydish.backend.post.model.Post;
-import com.happydish.backend.post.model.PostStatus;
+import com.happydish.backend.post.model.Status;
+import com.happydish.backend.post.repository.CommentRepository;
 import com.happydish.backend.post.repository.PostRepository;
-import com.happydish.backend.user.model.Role;
 import com.happydish.backend.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +24,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class PostService {
+    private final CommentRepository commentRepository;
     private final PostRepository postRepository;
     private final S3Uploader s3Uploader;
 
@@ -42,9 +45,9 @@ public class PostService {
     @Transactional(readOnly = true)
     public ResponseEntity<?> search(String title, Pageable pageable) {
         if (title.equals("")) {
-            return ResponseEntity.ok(postRepository.findAllByStatus(PostStatus.ACTIVE, pageable).map(Post::toPostDto));
+            return ResponseEntity.ok(postRepository.findAllByStatus(Status.ACTIVE, pageable).map(Post::toPostDto));
         }
-        return ResponseEntity.ok(postRepository.findAllByTitleContainingAndStatus(title, PostStatus.ACTIVE, pageable).map(Post::toPostDto));
+        return ResponseEntity.ok(postRepository.findAllByTitleContainingAndStatus(title, Status.ACTIVE, pageable).map(Post::toPostDto));
     }
 
     @Transactional
@@ -86,5 +89,24 @@ public class PostService {
         post.edit(requestDto);
 
         return ResponseEntity.ok(post.toPostDto());
+    }
+
+    @Transactional
+    public ResponseEntity<?> saveComment(long id, CommentRequestDto requestDto, PrincipleDetails principleDetails) {
+        User loginUser = principleDetails.getUser();
+
+        Optional<Post> optionalPost = postRepository.findById(id);
+        if (optionalPost.isEmpty()) {
+            return ResponseEntity.badRequest().body("Post Not Found");
+        }
+        Post post = optionalPost.get();
+
+        Comment comment = commentRepository.save(Comment.builder()
+                                        .content(requestDto.getContent())
+                                        .post(post)
+                                        .user(loginUser)
+                                        .build());
+
+        return ResponseEntity.ok(comment.toCommentDto());
     }
 }

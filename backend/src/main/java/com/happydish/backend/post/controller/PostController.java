@@ -1,8 +1,9 @@
 package com.happydish.backend.post.controller;
 
 import com.happydish.backend.global.auth.PrincipleDetails;
-import com.happydish.backend.post.dto.EditRequestDto;
-import com.happydish.backend.post.dto.SaveRequestDto;
+import com.happydish.backend.post.dto.comment.CommentRequestDto;
+import com.happydish.backend.post.dto.post.EditRequestDto;
+import com.happydish.backend.post.dto.post.SaveRequestDto;
 import com.happydish.backend.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -46,5 +47,12 @@ public class PostController {
                                   @RequestPart(value = "image") MultipartFile multipartFile,
                                   @AuthenticationPrincipal PrincipleDetails principleDetails) throws IOException{
         return postService.edit(id, requestDto, multipartFile, principleDetails);
+    }
+
+    @PostMapping("/{postId}/comments")
+    public ResponseEntity<?> saveComment(@PathVariable(name = "postId") long id,
+                                         @RequestBody CommentRequestDto requestDto,
+                                         @AuthenticationPrincipal PrincipleDetails principleDetails) {
+        return postService.saveComment(id, requestDto, principleDetails);
     }
 }
