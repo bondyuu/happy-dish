@@ -1,4 +1,4 @@
-package com.happydish.backend.post.dto;
+package com.happydish.backend.post.dto.post;
 
 import com.happydish.backend.user.dto.UserDto;
 import lombok.Builder;
