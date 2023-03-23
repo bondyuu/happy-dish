@@ -20,10 +20,6 @@ import java.io.IOException;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/loginsuccess")
-    private ResponseEntity<?> success(HttpServletRequest request, HttpServletResponse response) {
-        return ResponseEntity.ok("SUCCESS");
-    }
 
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody SignupRequestDto requestDto) {
