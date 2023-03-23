@@ -2,7 +2,11 @@ package com.happydish.backend.user.service;
 
 import com.happydish.backend.global.auth.PrincipleDetails;
 import com.happydish.backend.global.util.S3Uploader;
+import com.happydish.backend.post.model.Heart;
+import com.happydish.backend.post.repository.HeartRepository;
+import com.happydish.backend.post.repository.PostRepository;
 import com.happydish.backend.user.dto.EditRequestDto;
+import com.happydish.backend.user.dto.MypageResponseDto;
 import com.happydish.backend.user.dto.SignupRequestDto;
 import com.happydish.backend.user.model.Role;
 import com.happydish.backend.user.model.User;
@@ -23,6 +27,7 @@ import java.util.Optional;
 public class UserService {
     private final S3Uploader s3Uploader;
     private final UserRepository userRepository;
+    private final HeartRepository heartRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
@@ -77,5 +82,17 @@ public class UserService {
         loginUser.deletedBy(Role.ROLE_USER);
 
         return ResponseEntity.ok("SUCCESS");
+    }
+
+    @Transactional(readOnly = true)
+    public ResponseEntity<?> getMyPage(PrincipleDetails principleDetails) {
+        User loginUser = principleDetails.getUser();
+
+        long heartNum = heartRepository.countAllByUser(loginUser);
+
+        return ResponseEntity.ok(MypageResponseDto.builder()
+                                            .user(loginUser.toUserDto())
+                                            .heartNum(heartNum)
+                                            .build());
     }
 }

@@ -38,4 +38,9 @@ public class UserController {
                                     @AuthenticationPrincipal PrincipleDetails principleDetails) {
         return userService.delete(id, principleDetails);
     }
+
+    @GetMapping("/mypage")
+    public ResponseEntity<?> getMyPage(@AuthenticationPrincipal PrincipleDetails principleDetails) {
+        return userService.getMyPage(principleDetails);
+    }
 }
