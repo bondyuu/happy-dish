@@ -17,9 +17,11 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class Timestamped {
 
+    @Column
     @CreationTimestamp
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
 
+    @Column
     @UpdateTimestamp
-    private Timestamp modifiedAt;
+    private LocalDateTime modifiedAt;
 }
