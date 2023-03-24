@@ -23,6 +23,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final TokenProvider tokenProvider;
     private final PrincipleOauth2UserService principleOauth2UserService;
+    private final CustomLoginSuccessHandler customLoginSuccessHandler;
 
     @Bean
     public BCryptPasswordEncoder encodePwd(){
@@ -52,10 +53,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .formLogin()
-                .successHandler(new CustomLoginSuccessHandler(tokenProvider, new ObjectMapper()))
+                .successHandler(customLoginSuccessHandler)
                 .and()
                 .oauth2Login()
-                .successHandler(new CustomLoginSuccessHandler(tokenProvider, new ObjectMapper()))
+                .successHandler(customLoginSuccessHandler)
                 .userInfoEndpoint()
                 .userService(principleOauth2UserService);
 
