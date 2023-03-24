@@ -66,6 +66,11 @@ public class User extends Timestamped {
         this.profileUrl = profileUrl;
     }
 
+    public User(String email) {
+        this.email = email;
+        this.role = Role.ROLE_USER;
+    }
+
     public void editImage(String url) {
         this.profileUrl = url;
     }

@@ -1,6 +1,11 @@
 package com.happydish.backend.global.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.happydish.backend.global.auth.PrincipleOauth2UserService;
+import com.happydish.backend.global.exception.AccessDeniedHandlerException;
+import com.happydish.backend.global.exception.AuthenticationEntryPointException;
+import com.happydish.backend.global.jwt.JwtFilter;
+import com.happydish.backend.global.jwt.TokenProvider;
 import com.happydish.backend.global.util.CustomLoginSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -8,13 +13,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+    private final TokenProvider tokenProvider;
     private final PrincipleOauth2UserService principleOauth2UserService;
 
     @Bean
@@ -31,16 +38,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .frameOptions()
                 .disable();
 
-        http.authorizeRequests()
-                .anyRequest().permitAll()
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        http.exceptionHandling()
+            .accessDeniedHandler(new AccessDeniedHandlerException())
+            .authenticationEntryPoint(new AuthenticationEntryPointException());
+
+        http.httpBasic().disable()
+                .authorizeRequests()
+                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/users/save").permitAll()
+                .anyRequest().authenticated()
 
                 .and()
                 .formLogin()
-                .loginProcessingUrl("/login")
-                .successHandler(new CustomLoginSuccessHandler())
+                .successHandler(new CustomLoginSuccessHandler(tokenProvider, new ObjectMapper()))
                 .and()
                 .oauth2Login()
+                .successHandler(new CustomLoginSuccessHandler(tokenProvider, new ObjectMapper()))
                 .userInfoEndpoint()
                 .userService(principleOauth2UserService);
+
+        http.addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class);
     }
 }
