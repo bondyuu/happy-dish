@@ -41,6 +41,9 @@ export default {
       formLogin(userData)
           .then((res) => {
             console.log(res);
+            localStorage.setItem("at", res.data.grantType+" "+ res.data.accessToken);
+            localStorage.setItem("rt", res.data.refreshToken);
+            this.$router.push("/");
           })
           .catch((err) => {
             console.log(err);

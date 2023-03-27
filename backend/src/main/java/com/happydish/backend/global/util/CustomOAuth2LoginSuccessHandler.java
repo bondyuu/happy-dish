@@ -42,10 +42,10 @@ public class CustomOAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSucc
 
         refreshTokenRepository.save(RefreshToken.builder().user(user).token(refreshToken).build());
 
-        Cookie rt = new Cookie("refreshToken", token.getRefreshToken());
-        response.addCookie(rt);
         String target = UriComponentsBuilder.fromUriString("http://localhost:8081/oauth/redirect")
-                        .queryParam("token", token.getAccessToken()).build().toUriString();
+                        .queryParam("at", token.getGrantType()+" "+token.getAccessToken())
+                        .queryParam("rt", token.getRefreshToken())
+                        .build().toUriString();
         getRedirectStrategy().sendRedirect(request,response, target);
 
     }

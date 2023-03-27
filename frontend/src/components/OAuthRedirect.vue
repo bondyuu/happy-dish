@@ -5,8 +5,8 @@
 export default {
   name: "OAuthRedirect",
   created() {
-    const token = this.$route.query.token;
-    console.log(token);
+    localStorage.setItem("at",this.$route.query.at);
+    localStorage.setItem("rt",this.$route.query.rt);
     this.$router.push("/");
   },
   data() {
