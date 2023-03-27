@@ -11,6 +11,7 @@ import com.happydish.backend.post.model.Status;
 import com.happydish.backend.post.repository.CommentRepository;
 import com.happydish.backend.post.repository.PostRepository;
 import com.happydish.backend.user.model.User;
+import com.happydish.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -26,16 +27,22 @@ import java.util.Optional;
 public class PostService {
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
     private final S3Uploader s3Uploader;
 
     @Transactional
     public ResponseEntity<?> save(SaveRequestDto requestDto, MultipartFile multipartFile, PrincipleDetails principleDetails) throws IOException {
         String url = s3Uploader.uploadFiles(multipartFile,"static/posts/");
 
+        Optional<User> optionalUser = userRepository.findByEmail(principleDetails.getUser().getEmail());
+        if (optionalUser.isEmpty()) {
+            return ResponseEntity.badRequest().body("User Not Found");
+        }
+        User user = optionalUser.get();
         Post post = postRepository.save(Post.builder()
                                 .title(requestDto.getTitle())
                                 .content(requestDto.getContent())
-                                .user(principleDetails.getUser())
+                                .user(user)
                                 .url(url)
                                 .build());
 

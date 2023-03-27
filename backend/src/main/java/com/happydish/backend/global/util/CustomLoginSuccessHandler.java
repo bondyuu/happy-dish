@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
     private final TokenProvider tokenProvider;
     private final ObjectMapper objectMapper;
     @Override
+    @Transactional
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -38,7 +40,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 
         Optional<RefreshToken> optionalRefreshToken = refreshTokenRepository.findByUser(user);
         optionalRefreshToken.ifPresent(refreshTokenRepository::delete);
-        
+
 
         refreshTokenRepository.save(RefreshToken.builder().user(user).token(refreshToken).build());
 

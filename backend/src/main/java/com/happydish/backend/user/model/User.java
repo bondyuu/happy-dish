@@ -51,7 +51,10 @@ public class User extends Timestamped {
     @Column
     private String profileUrl;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
+    private List<Post> postList = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
     private List<Heart> heartList = new ArrayList<>();
 
     @Builder
