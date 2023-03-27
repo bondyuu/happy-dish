@@ -7,6 +7,7 @@ import com.happydish.backend.global.exception.AuthenticationEntryPointException;
 import com.happydish.backend.global.jwt.JwtFilter;
 import com.happydish.backend.global.jwt.TokenProvider;
 import com.happydish.backend.global.util.CustomLoginSuccessHandler;
+import com.happydish.backend.global.util.CustomOAuth2LoginSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final TokenProvider tokenProvider;
     private final PrincipleOauth2UserService principleOauth2UserService;
     private final CustomLoginSuccessHandler customLoginSuccessHandler;
+    private final CustomOAuth2LoginSuccessHandler customOAuth2LoginSuccessHandler;
     private final CorsConfigurationSource corsConfigurationSource;
 
     @Bean
@@ -51,16 +53,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.httpBasic().disable()
                 .authorizeRequests()
-                .antMatchers("/h2-console/**").permitAll()
-                .antMatchers("/users/save").permitAll()
-                .anyRequest().authenticated()
+//                .antMatchers("/h2-console/**").permitAll()
+//                .antMatchers("/users/save").permitAll()
+//                .antMatchers("/login/**").permitAll()
+//                .antMatchers("/logout/**").permitAll()
+//                .antMatchers("/oauth2/**").permitAll()
+                .anyRequest().permitAll()
 
                 .and()
                 .formLogin()
                 .successHandler(customLoginSuccessHandler)
                 .and()
                 .oauth2Login()
-                .successHandler(customLoginSuccessHandler)
+                .successHandler(customOAuth2LoginSuccessHandler)
                 .userInfoEndpoint()
                 .userService(principleOauth2UserService);
 
