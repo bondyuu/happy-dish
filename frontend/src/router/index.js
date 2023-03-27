@@ -17,6 +17,14 @@ const routes = [
     {
         path: '/oauth/redirect',
         component: () => import('../components/OAuthRedirect.vue')
+    },
+    {
+        path: '/posts',
+        component: () => import('../views/PostList.vue')
+    },
+    {
+        path: '/write-post',
+        component: () => import('../views/PostWrite.vue')
     }
 ]
 

@@ -14,3 +14,9 @@ export function signUp(data) {
 export function formLogin(data) {
     return instance.post("/login", qs.stringify(data), {headers:{"Content-Type": "application/x-www-form-urlencoded"}})
 }
+export function getPosts(title, page) {
+    return instance.get("/posts", {params:{title: title, page: page}})
+}
+export function savePost(postData) {
+    return instance.post("/posts/save",postData, {headers:{"Content-Type":"multipart/form-data", "Authorization": localStorage.getItem("at")}})
+}

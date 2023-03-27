@@ -3,12 +3,12 @@
     <div class="logo">
       <h2>HAPDI</h2>
     </div>
-    <div class="nav-container">
-      <router-link to="">게시글</router-link> |
-      <router-link to="">게시글</router-link> |
-      <router-link to="">게시글</router-link> |
-      <router-link to="">게시글</router-link>
-    </div>
+    <nav class="nav-container">
+      <router-link to="/posts">게시글</router-link> |
+      <router-link to="/asdfasdf">게시글</router-link> |
+      <router-link to="/asdf">게시글</router-link> |
+      <router-link to="/gaw">게시글</router-link>
+    </nav>
     <div class="login">
       <router-link to="/login"><b-button variant="outline-primary">Login</b-button></router-link>
       <router-link to="/sign-up"><b-button variant="outline-primary">Sign-Up</b-button></router-link>
@@ -31,6 +31,17 @@ export default {
 }
 .nav-container {
   margin-left: 3%;
-  margin-right: 60%;
+  margin-right: 42%;
+}
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+  font-size: 25px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>
