@@ -1,17 +1,22 @@
 <template>
   <div class="login">
-    <h1 style="margin-bottom: 50px; margin-top: 100px;">Login</h1>
+    <h1 >Login</h1>
     <b-form  @submit.stop.prevent>
-      <div style="margin-bottom: 50px;">
-        <label for="email" style="margin-bottom: 10px; font-size: 20px;">email</label>
-        <b-form-input v-model="username" id="email" style="width: 30%; margin-left: 35%;"></b-form-input>
+      <div >
+        <label for="email" >email</label>
+        <b-form-input v-model="username" id="email"></b-form-input>
       </div>
-      <div style="margin-bottom: 50px;">
-        <label for="password" style="margin-bottom: 10px; font-size: 20px;">password</label>
-        <b-form-input v-model="password" id="password" type="password" style="width: 30%; margin-left: 35%;"></b-form-input>
+      <div>
+        <label for="password">password</label>
+        <b-form-input v-model="password" id="password" type="password"></b-form-input>
       </div>
     </b-form>
     <b-button variant="outline-primary" @click="submitForm">Login</b-button>
+  </div>
+  <div class="oauth">
+    <b-button variant="outline-primary" @:click="submitOAuth('google')">Google</b-button>
+    <b-button variant="outline-primary" @:click="submitOAuth('kakao')">Kakao</b-button>
+    <router-link to="/sign-up">회원가입</router-link>
   </div>
 </template>
 
@@ -42,11 +47,40 @@ export default {
           });
 
     },
-
+    submitOAuth(provider) {
+      location.href = 'http://localhost:8080/oauth2/authorization/' + provider;
+    }
   }
 }
 </script>
 
 <style scoped>
+.login {
+  text-align: center;
+  width: 60%;
+  margin-left: 20%;
+  margin-top: 150px;
+}
+h1 {
+  margin-bottom: 50px;
+}
+#email {
+  margin-top: 10px;
+  margin-bottom: 30px;
+  margin-left: 25%;
+  width: 50%;
+}
+#password {
+  margin-top: 10px;
+  margin-bottom: 30px;
+  margin-left: 25%;
+  width: 50%;
+}
+.oauth {
+  text-align: center;
+  width: 60%;
+  margin-top: 20px;
+  margin-left: 20%;
 
+}
 </style>

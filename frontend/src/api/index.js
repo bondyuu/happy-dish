@@ -14,6 +14,3 @@ export function signUp(data) {
 export function formLogin(data) {
     return instance.post("/login", qs.stringify(data), {headers:{"Content-Type": "application/x-www-form-urlencoded"}})
 }
-export function oauthLogin() {
-    return instance.get("/oauth2/authorization/google")
-}
