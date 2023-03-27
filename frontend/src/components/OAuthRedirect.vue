@@ -7,6 +7,7 @@ export default {
   created() {
     localStorage.setItem("at",this.$route.query.at);
     localStorage.setItem("rt",this.$route.query.rt);
+    this.$store.commit('setLogin',true);
     this.$router.push("/");
   },
   data() {

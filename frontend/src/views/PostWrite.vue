@@ -26,12 +26,19 @@
           <b-form-input id="content" v-model="content"></b-form-input>
         </b-form-group>
 
+        <b-form-group
+            label="Image :"
+            label-for="image"
+            label-cols-sm="2"
+            label-align-sm="right"
+        >
+          <input type="file" @change="handleFile">
+        </b-form-group>
+
       </b-form-group>
       <b-button pill variant="outline-secondary" style="margin-left: 85%;" @click="save">Save</b-button>
     </b-card>
   </div>
-  <input type="file" @change="handleFile">
-  <div class="mt-3">Selected file: {{ file ? file.name : '' }}</div>
 </template>
 
 <script>
@@ -64,6 +71,7 @@ export default {
       savePost(formData)
           .then((res) => {
             console.log(res);
+            this.$router.push("/");
           })
           .catch((err) => {
             console.log(err);

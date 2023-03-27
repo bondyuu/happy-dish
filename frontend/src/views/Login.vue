@@ -43,6 +43,7 @@ export default {
             console.log(res);
             localStorage.setItem("at", res.data.grantType+" "+ res.data.accessToken);
             localStorage.setItem("rt", res.data.refreshToken);
+            this.$store.commit('setLogin',true);
             this.$router.push("/");
           })
           .catch((err) => {

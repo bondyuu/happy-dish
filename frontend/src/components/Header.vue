@@ -1,6 +1,6 @@
 <template>
   <header class="header-container">
-    <div class="logo">
+    <div class="logo" @click="main">
       <h2>HAPDI</h2>
     </div>
     <nav class="nav-container">
@@ -9,7 +9,10 @@
       <router-link to="/asdf">게시글</router-link> |
       <router-link to="/gaw">게시글</router-link>
     </nav>
-    <div class="login">
+    <div class="login" v-if="this.$store.getters.isLogin">
+      <b-button variant="outline-primary" @click="logout">Logout</b-button>
+    </div>
+    <div v-else>
       <router-link to="/login"><b-button variant="outline-primary">Login</b-button></router-link>
       <router-link to="/sign-up"><b-button variant="outline-primary">Sign-Up</b-button></router-link>
     </div>
@@ -18,7 +21,18 @@
 
 <script>
 export default {
-  name: "Header"
+  name: "Header",
+  methods: {
+    main() {
+      this.$router.push('/');
+    },
+    logout() {
+      localStorage.removeItem('at');
+      localStorage.removeItem('rt');
+      this.$store.commit('setLogin',false);
+      this.$router.push("/");
+    }
+  }
 }
 </script>
 
