@@ -11,6 +11,7 @@
     <b-card-text>
       {{ item.content }}
     </b-card-text>
+    <b-card-text>{{ item.createdAt }}</b-card-text>
   </b-card>
 </template>
 

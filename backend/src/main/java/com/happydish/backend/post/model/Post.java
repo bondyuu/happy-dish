@@ -70,6 +70,7 @@ public class Post extends Timestamped {
                 .status(this.status.toString())
                 .imageUrl(this.imageUrl)
                 .heartNum(this.heartList.size())
+                .createdAt(this.getCreatedAt())
                 .build();
     }
 }

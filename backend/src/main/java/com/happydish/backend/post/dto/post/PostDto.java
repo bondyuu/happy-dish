@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Getter
 @NoArgsConstructor
 public class PostDto {
@@ -15,9 +17,10 @@ public class PostDto {
     private String imageUrl;
     private long heartNum;
     private boolean isHeart;
+    private LocalDateTime createdAt;
 
     @Builder
-    public PostDto(String title, String content, UserDto author, String status, String imageUrl, long heartNum, boolean isHeart) {
+    public PostDto(String title, String content, UserDto author, String status, String imageUrl, long heartNum, boolean isHeart, LocalDateTime createdAt) {
         this.title = title;
         this.content = content;
         this.author = author;
@@ -25,5 +28,6 @@ public class PostDto {
         this.imageUrl = imageUrl;
         this.heartNum = heartNum;
         this.isHeart = isHeart;
+        this.createdAt = createdAt;
     }
 }
