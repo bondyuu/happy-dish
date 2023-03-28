@@ -35,6 +35,12 @@ public class PostController {
         return postService.search(title, pageable);
     }
 
+    @GetMapping("/{postId}")
+    public ResponseEntity<?> getDetail(@PathVariable(name = "postId") long id,
+                                       @AuthenticationPrincipal PrincipleDetails principleDetails) {
+        return postService.getDetail(id, principleDetails);
+    }
+
     @PostMapping("/{postId}/delete")
     public ResponseEntity<?> delete(@PathVariable(name = "postId") long id,
                                     @AuthenticationPrincipal PrincipleDetails principleDetails) {

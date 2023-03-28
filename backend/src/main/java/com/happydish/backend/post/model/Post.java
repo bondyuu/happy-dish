@@ -2,6 +2,7 @@ package com.happydish.backend.post.model;
 
 import com.happydish.backend.global.util.Timestamped;
 import com.happydish.backend.post.dto.post.EditRequestDto;
+import com.happydish.backend.post.dto.post.PostDetailDto;
 import com.happydish.backend.post.dto.post.PostDto;
 import com.happydish.backend.user.model.Role;
 import com.happydish.backend.user.model.User;
@@ -64,6 +65,7 @@ public class Post extends Timestamped {
 
     public PostDto toPostDto() {
         return PostDto.builder()
+                .postId(this.id)
                 .title(this.title)
                 .content(this.content)
                 .author(this.user.toUserDto())
@@ -71,6 +73,20 @@ public class Post extends Timestamped {
                 .imageUrl(this.imageUrl)
                 .heartNum(this.heartList.size())
                 .createdAt(this.getCreatedAt())
+                .build();
+    }
+
+    public PostDetailDto toDetailDtl() {
+        return PostDetailDto.builder()
+                .postId(this.id)
+                .title(this.title)
+                .content(this.content)
+                .author(this.user.toUserDto())
+                .status(this.status.toString())
+                .imageUrl(this.imageUrl)
+                .heartNum(this.heartList.size())
+                .createdAt(this.getCreatedAt())
+                .commentList(this.commentList)
                 .build();
     }
 }

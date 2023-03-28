@@ -57,6 +57,18 @@ public class PostService {
         return ResponseEntity.ok(postRepository.findAllByTitleContainingAndStatus(title, Status.ACTIVE, pageable).map(Post::toPostDto));
     }
 
+    @Transactional(readOnly = true)
+    public ResponseEntity<?> getDetail(long id, PrincipleDetails principleDetails) {
+        Optional<Post> optionalPost = postRepository.findById(id);
+        if (optionalPost.isEmpty()) {
+            return ResponseEntity.badRequest().body("Post Not Found");
+        }
+
+        Post post = optionalPost.get();
+
+        return ResponseEntity.ok(post.toDetailDtl());
+    }
+
     @Transactional
     public ResponseEntity<?> delete(long id, PrincipleDetails principleDetails) {
         Optional<Post> optionalPost = postRepository.findById(id);
