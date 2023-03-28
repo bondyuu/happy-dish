@@ -71,7 +71,7 @@ export default {
       savePost(formData)
           .then((res) => {
             console.log(res);
-            this.$router.push("/");
+            this.$router.push("/posts");
           })
           .catch((err) => {
             console.log(err);
