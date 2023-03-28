@@ -1,4 +1,4 @@
-package com.happydish.backend.post.dto.post;
+package com.happydish.backend.item.dto;
 
 import com.happydish.backend.user.dto.UserDto;
 import lombok.Builder;
@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
-public class PostDto {
-    private long postId;
+public class ItemDto {
+    private long itemId;
     private String title;
     private String content;
     private UserDto author;
@@ -21,8 +21,8 @@ public class PostDto {
     private LocalDateTime createdAt;
 
     @Builder
-    public PostDto(long postId, String title, String content, UserDto author, String status, String imageUrl, long heartNum, boolean isHeart, LocalDateTime createdAt) {
-        this.postId = postId;
+    public ItemDto(long itemId, String title, String content, UserDto author, String status, String imageUrl, long heartNum, boolean isHeart, LocalDateTime createdAt) {
+        this.itemId = itemId;
         this.title = title;
         this.content = content;
         this.author = author;

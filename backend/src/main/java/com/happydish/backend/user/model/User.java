@@ -1,8 +1,8 @@
 package com.happydish.backend.user.model;
 
 import com.happydish.backend.global.util.Timestamped;
-import com.happydish.backend.post.model.Heart;
-import com.happydish.backend.post.model.Post;
+import com.happydish.backend.item.model.Heart;
+import com.happydish.backend.item.model.Item;
 import com.happydish.backend.user.dto.UserDto;
 import com.sun.istack.NotNull;
 import lombok.Builder;
@@ -52,7 +52,7 @@ public class User extends Timestamped {
     private String profileUrl;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
-    private List<Post> postList = new ArrayList<>();
+    private List<Item> itemList = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
     private List<Heart> heartList = new ArrayList<>();
@@ -86,7 +86,7 @@ public class User extends Timestamped {
         return target.getId() != this.id && !this.role.equals(Role.ROLE_ADMIN);
     }
 
-    public boolean canNotControl(Post target) {
+    public boolean canNotControl(Item target) {
         return !target.getUser().equals(this) && !this.role.equals(Role.ROLE_ADMIN);
     }
 

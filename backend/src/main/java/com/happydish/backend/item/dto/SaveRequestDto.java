@@ -1,4 +1,4 @@
-package com.happydish.backend.post.dto.post;
+package com.happydish.backend.item.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

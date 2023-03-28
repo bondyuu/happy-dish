@@ -1,4 +1,4 @@
-package com.happydish.backend.post.model;
+package com.happydish.backend.item.model;
 
 import lombok.Getter;
 

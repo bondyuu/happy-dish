@@ -2,9 +2,7 @@ package com.happydish.backend.user.service;
 
 import com.happydish.backend.global.auth.PrincipleDetails;
 import com.happydish.backend.global.util.S3Uploader;
-import com.happydish.backend.post.model.Heart;
-import com.happydish.backend.post.repository.HeartRepository;
-import com.happydish.backend.post.repository.PostRepository;
+import com.happydish.backend.item.repository.HeartRepository;
 import com.happydish.backend.user.dto.EditRequestDto;
 import com.happydish.backend.user.dto.MypageResponseDto;
 import com.happydish.backend.user.dto.SignupRequestDto;
@@ -12,7 +10,6 @@ import com.happydish.backend.user.model.Role;
 import com.happydish.backend.user.model.User;
 import com.happydish.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.expression.spel.ast.OpAnd;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

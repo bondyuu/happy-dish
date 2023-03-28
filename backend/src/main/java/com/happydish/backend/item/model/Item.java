@@ -1,9 +1,9 @@
-package com.happydish.backend.post.model;
+package com.happydish.backend.item.model;
 
 import com.happydish.backend.global.util.Timestamped;
-import com.happydish.backend.post.dto.post.EditRequestDto;
-import com.happydish.backend.post.dto.post.PostDetailDto;
-import com.happydish.backend.post.dto.post.PostDto;
+import com.happydish.backend.item.dto.EditRequestDto;
+import com.happydish.backend.item.dto.ItemDetailDto;
+import com.happydish.backend.item.dto.ItemDto;
 import com.happydish.backend.user.model.Role;
 import com.happydish.backend.user.model.User;
 import lombok.Builder;
@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Post extends Timestamped {
+public class Item extends Timestamped {
     @Id
     @GeneratedValue
     private long id;
@@ -33,13 +33,11 @@ public class Post extends Timestamped {
     private Status status;
     @Column
     private String imageUrl;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "item", orphanRemoval = true)
     private List<Heart> heartList = new ArrayList<>();
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", orphanRemoval = true)
-    private List<Comment> commentList = new ArrayList<>();
 
     @Builder
-    public Post(String title, String content,User user, String url) {
+    public Item(String title, String content, User user, String url) {
         this.title = title;
         this.content = content;
         this.user = user;
@@ -63,9 +61,9 @@ public class Post extends Timestamped {
         }
     }
 
-    public PostDto toPostDto() {
-        return PostDto.builder()
-                .postId(this.id)
+    public ItemDto toPostDto() {
+        return ItemDto.builder()
+                .itemId(this.id)
                 .title(this.title)
                 .content(this.content)
                 .author(this.user.toUserDto())
@@ -76,9 +74,9 @@ public class Post extends Timestamped {
                 .build();
     }
 
-    public PostDetailDto toDetailDtl() {
-        return PostDetailDto.builder()
-                .postId(this.id)
+    public ItemDetailDto toDetailDtl() {
+        return ItemDetailDto.builder()
+                .itemId(this.id)
                 .title(this.title)
                 .content(this.content)
                 .author(this.user.toUserDto())
@@ -86,7 +84,6 @@ public class Post extends Timestamped {
                 .imageUrl(this.imageUrl)
                 .heartNum(this.heartList.size())
                 .createdAt(this.getCreatedAt())
-                .commentList(this.commentList)
                 .build();
     }
 }

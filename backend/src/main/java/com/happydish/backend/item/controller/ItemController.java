@@ -1,10 +1,9 @@
-package com.happydish.backend.post.controller;
+package com.happydish.backend.item.controller;
 
 import com.happydish.backend.global.auth.PrincipleDetails;
-import com.happydish.backend.post.dto.comment.CommentRequestDto;
-import com.happydish.backend.post.dto.post.EditRequestDto;
-import com.happydish.backend.post.dto.post.SaveRequestDto;
-import com.happydish.backend.post.service.PostService;
+import com.happydish.backend.item.dto.EditRequestDto;
+import com.happydish.backend.item.dto.SaveRequestDto;
+import com.happydish.backend.item.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -19,32 +18,32 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/posts")
 @RequiredArgsConstructor
-public class PostController {
-    private final PostService postService;
+public class ItemController {
+    private final ItemService itemService;
 
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestPart(value = "requestDto") SaveRequestDto requestDto,
                                   @RequestPart(value = "image")MultipartFile multipartFile,
                                   @AuthenticationPrincipal PrincipleDetails principleDetails) throws IOException {
-        return postService.save(requestDto, multipartFile, principleDetails);
+        return itemService.save(requestDto, multipartFile, principleDetails);
     }
 
     @GetMapping()
     public ResponseEntity<?> search(@RequestParam String title,
                                     @PageableDefault(sort = "createdAt",direction = Sort.Direction.DESC)Pageable pageable) {
-        return postService.search(title, pageable);
+        return itemService.search(title, pageable);
     }
 
     @GetMapping("/{postId}")
     public ResponseEntity<?> getDetail(@PathVariable(name = "postId") long id,
                                        @AuthenticationPrincipal PrincipleDetails principleDetails) {
-        return postService.getDetail(id, principleDetails);
+        return itemService.getDetail(id, principleDetails);
     }
 
     @PostMapping("/{postId}/delete")
     public ResponseEntity<?> delete(@PathVariable(name = "postId") long id,
                                     @AuthenticationPrincipal PrincipleDetails principleDetails) {
-        return postService.delete(id, principleDetails);
+        return itemService.delete(id, principleDetails);
     }
 
     @PostMapping("/{postId}/edit")
@@ -52,13 +51,7 @@ public class PostController {
                                   @RequestPart(value = "requestDto") EditRequestDto requestDto,
                                   @RequestPart(value = "image") MultipartFile multipartFile,
                                   @AuthenticationPrincipal PrincipleDetails principleDetails) throws IOException{
-        return postService.edit(id, requestDto, multipartFile, principleDetails);
+        return itemService.edit(id, requestDto, multipartFile, principleDetails);
     }
 
-    @PostMapping("/{postId}/comments")
-    public ResponseEntity<?> saveComment(@PathVariable(name = "postId") long id,
-                                         @RequestBody CommentRequestDto requestDto,
-                                         @AuthenticationPrincipal PrincipleDetails principleDetails) {
-        return postService.saveComment(id, requestDto, principleDetails);
-    }
 }
