@@ -20,3 +20,6 @@ export function getPosts(title, page) {
 export function savePost(postData) {
     return instance.post("/posts/save",postData, {headers:{"Content-Type":"multipart/form-data", "Authorization": localStorage.getItem("at")}})
 }
+export function getPostDetail(id) {
+    return instance.get("/posts/" + id, {headers:{"Authorization": localStorage.getItem("at")}})
+}

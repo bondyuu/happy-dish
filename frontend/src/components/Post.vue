@@ -4,20 +4,27 @@
       :img-src="item.imageUrl"
       img-alt="Image"
       img-top
+      img-height="150px"
       tag="article"
-      style="width: 15rem;"
       class="mb-2"
   >
-    <b-card-text>
-      {{ item.content }}
-    </b-card-text>
+
     <b-card-text>{{ item.createdAt }}</b-card-text>
+    <div>
+      <b-icon-heart/>{{item.heartNum}}
+    </div>
   </b-card>
 </template>
 
 <script>
+
+import {BIconHeart} from "bootstrap-icons-vue";
+
 export default {
   name: "Post",
+  components: {
+    BIconHeart
+  },
   props: {
     item: Object
   }

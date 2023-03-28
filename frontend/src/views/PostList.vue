@@ -8,7 +8,7 @@
   </div>
   <div class="post-list" ref="scrollcheck">
     <div class="wrapper" v-for="post in list" :key="post">
-      <Post :item="post"/>
+      <Post :item="post" @click="showDetail(post.postId)"/>
     </div>
   </div>
 </template>
@@ -46,6 +46,9 @@ export default {
           .catch((err) => {
             console.log(err);
           });
+    },
+    showDetail(postId) {
+      this.$router.push('/posts/' + postId);
     }
   }
 }
@@ -53,23 +56,25 @@ export default {
 
 <style scoped>
 .post-list{
-  text-align: center;
+  /*text-align: center;*/
+  width: 80%;
+  margin-left: 11%;
 }
 .wrapper {
   margin-bottom: 20px;
-  margin-right: 3%;
-  width: 32%;
+  margin-right: 2.3%;
   display: inline-block;
+  width: 22%;
 }
 .mr-sm-2 {
   width: 30%;
-  margin-left: 15%;
+  margin-left: 11%;
   margin-right: 2%;
   margin-bottom: 3%;
 }
 .my-sm-0 {
   height: 36px;
-  margin-right: 24%;
+  margin-right: 33%;
 }
 .bt-write {
   height: 36px;

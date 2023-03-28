@@ -7,7 +7,7 @@
       <router-link to="/posts">게시글</router-link> |
       <router-link to="/asdfasdf">게시글</router-link> |
       <router-link to="/asdf">게시글</router-link> |
-      <router-link to="/gaw">게시글</router-link>
+      <router-link to="/my-page">마이페이지</router-link>
     </nav>
     <div class="login" v-if="this.$store.getters.isLogin">
       <b-button variant="outline-primary" @click="logout">Logout</b-button>
@@ -45,7 +45,7 @@ export default {
 }
 .nav-container {
   margin-left: 3%;
-  margin-right: 42%;
+  margin-right: 30%;
 }
 nav a {
   font-weight: bold;

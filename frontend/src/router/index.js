@@ -25,6 +25,14 @@ const routes = [
     {
         path: '/write-post',
         component: () => import('../views/PostWrite.vue')
+    },
+    {
+        path: '/my-page',
+        component: () => import('../views/MyPage.vue')
+    },
+    {
+        path: '/posts/:id',
+        component: () => import('../views/PostDetail.vue')
     }
 ]
 
