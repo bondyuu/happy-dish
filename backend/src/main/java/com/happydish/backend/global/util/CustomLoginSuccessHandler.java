@@ -3,7 +3,7 @@ package com.happydish.backend.global.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.happydish.backend.global.auth.PrincipleDetails;
-import com.happydish.backend.global.jwt.TokenProvider;
+import com.happydish.backend.global.auth.jwt.TokenProvider;
 import com.happydish.backend.user.dto.TokenDto;
 import com.happydish.backend.user.model.RefreshToken;
 import com.happydish.backend.user.model.User;

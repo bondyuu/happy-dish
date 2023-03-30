@@ -2,21 +2,19 @@ package com.happydish.backend.global.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.happydish.backend.global.auth.PrincipleDetails;
-import com.happydish.backend.global.jwt.TokenProvider;
+import com.happydish.backend.global.auth.jwt.TokenProvider;
 import com.happydish.backend.user.dto.TokenDto;
 import com.happydish.backend.user.model.RefreshToken;
 import com.happydish.backend.user.model.User;
 import com.happydish.backend.user.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

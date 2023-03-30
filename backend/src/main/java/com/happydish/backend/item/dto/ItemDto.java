@@ -13,7 +13,6 @@ public class ItemDto {
     private long itemId;
     private String title;
     private String content;
-    private UserDto author;
     private String status;
     private String imageUrl;
     private long heartNum;
@@ -21,11 +20,10 @@ public class ItemDto {
     private LocalDateTime createdAt;
 
     @Builder
-    public ItemDto(long itemId, String title, String content, UserDto author, String status, String imageUrl, long heartNum, boolean isHeart, LocalDateTime createdAt) {
+    public ItemDto(long itemId, String title, String content, String status, String imageUrl, long heartNum, boolean isHeart, LocalDateTime createdAt) {
         this.itemId = itemId;
         this.title = title;
         this.content = content;
-        this.author = author;
         this.status = status;
         this.imageUrl = imageUrl;
         this.heartNum = heartNum;

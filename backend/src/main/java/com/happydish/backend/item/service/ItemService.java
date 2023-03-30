@@ -7,6 +7,7 @@ import com.happydish.backend.item.dto.SaveRequestDto;
 import com.happydish.backend.item.model.Item;
 import com.happydish.backend.item.model.Status;
 import com.happydish.backend.item.repository.ItemRepository;
+import com.happydish.backend.user.model.Role;
 import com.happydish.backend.user.model.User;
 import com.happydish.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,10 +36,12 @@ public class ItemService {
             return ResponseEntity.badRequest().body("User Not Found");
         }
         User user = optionalUser.get();
+        if (!user.getRole().equals(Role.ROLE_ADMIN)) {
+            return ResponseEntity.badRequest().body("Not Permitted");
+        }
         Item item = itemRepository.save(Item.builder()
                                 .title(requestDto.getTitle())
                                 .content(requestDto.getContent())
-                                .user(user)
                                 .url(url)
                                 .build());
 
@@ -92,7 +95,7 @@ public class ItemService {
         Item item = optionalPost.get();
         User loginUser = principleDetails.getUser();
 
-        if (!item.getUser().equals(loginUser)) {
+        if (loginUser.canNotControl(item)) {
             return ResponseEntity.badRequest().body("Not Permitted");
         }
 

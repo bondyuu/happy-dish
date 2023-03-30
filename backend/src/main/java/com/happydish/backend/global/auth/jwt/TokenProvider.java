@@ -1,4 +1,4 @@
-package com.happydish.backend.global.jwt;
+package com.happydish.backend.global.auth.jwt;
 
 import com.happydish.backend.global.auth.PrincipleDetails;
 import com.happydish.backend.user.dto.TokenDto;

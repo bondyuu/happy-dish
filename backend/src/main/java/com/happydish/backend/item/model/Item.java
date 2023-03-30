@@ -25,9 +25,6 @@ public class Item extends Timestamped {
     private String title;
     @Column
     private String content;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
     @Column
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -40,7 +37,6 @@ public class Item extends Timestamped {
     public Item(String title, String content, User user, String url) {
         this.title = title;
         this.content = content;
-        this.user = user;
         this.status = Status.ACTIVE;
         this.imageUrl = url;
     }
@@ -66,7 +62,6 @@ public class Item extends Timestamped {
                 .itemId(this.id)
                 .title(this.title)
                 .content(this.content)
-                .author(this.user.toUserDto())
                 .status(this.status.toString())
                 .imageUrl(this.imageUrl)
                 .heartNum(this.heartList.size())
@@ -79,7 +74,6 @@ public class Item extends Timestamped {
                 .itemId(this.id)
                 .title(this.title)
                 .content(this.content)
-                .author(this.user.toUserDto())
                 .status(this.status.toString())
                 .imageUrl(this.imageUrl)
                 .heartNum(this.heartList.size())

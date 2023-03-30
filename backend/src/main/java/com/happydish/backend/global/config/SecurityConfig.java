@@ -1,11 +1,10 @@
 package com.happydish.backend.global.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.happydish.backend.global.auth.PrincipleOauth2UserService;
 import com.happydish.backend.global.exception.AccessDeniedHandlerException;
 import com.happydish.backend.global.exception.AuthenticationEntryPointException;
-import com.happydish.backend.global.jwt.JwtFilter;
-import com.happydish.backend.global.jwt.TokenProvider;
+import com.happydish.backend.global.auth.jwt.JwtFilter;
+import com.happydish.backend.global.auth.jwt.TokenProvider;
 import com.happydish.backend.global.util.CustomLoginSuccessHandler;
 import com.happydish.backend.global.util.CustomOAuth2LoginSuccessHandler;
 import lombok.RequiredArgsConstructor;

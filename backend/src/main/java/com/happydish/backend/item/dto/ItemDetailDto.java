@@ -14,7 +14,6 @@ public class ItemDetailDto {
     private long itemId;
     private String title;
     private String content;
-    private UserDto author;
     private String status;
     private String imageUrl;
     private long heartNum;
@@ -22,12 +21,11 @@ public class ItemDetailDto {
     private LocalDateTime createdAt;
 
     @Builder
-    public ItemDetailDto(long itemId, String title, String content, UserDto author, String status, String imageUrl,
+    public ItemDetailDto(long itemId, String title, String content, String status, String imageUrl,
                          long heartNum, boolean isHeart, LocalDateTime createdAt) {
         this.itemId = itemId;
         this.title = title;
         this.content = content;
-        this.author = author;
         this.status = status;
         this.imageUrl = imageUrl;
         this.heartNum = heartNum;

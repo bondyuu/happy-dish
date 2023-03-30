@@ -52,9 +52,6 @@ public class User extends Timestamped {
     private String profileUrl;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
-    private List<Item> itemList = new ArrayList<>();
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
     private List<Heart> heartList = new ArrayList<>();
 
     @Builder
@@ -87,7 +84,7 @@ public class User extends Timestamped {
     }
 
     public boolean canNotControl(Item target) {
-        return !target.getUser().equals(this) && !this.role.equals(Role.ROLE_ADMIN);
+        return !this.role.equals(Role.ROLE_ADMIN);
     }
 
     public boolean isAdmin() {
