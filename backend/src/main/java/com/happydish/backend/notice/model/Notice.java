@@ -2,6 +2,7 @@ package com.happydish.backend.notice.model;
 
 
 import com.happydish.backend.global.util.Timestamped;
+import com.happydish.backend.notice.dto.NoticeRequestDto;
 import com.happydish.backend.notice.dto.NoticeResponseDto;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,9 +33,15 @@ public class Notice extends Timestamped {
 
     public NoticeResponseDto toResponseDto() {
         return NoticeResponseDto.builder()
+                .id(this.id)
                 .title(this.title)
                 .content(this.content)
                 .createdAt(this.getCreatedAt())
                 .build();
+    }
+
+    public void edit(NoticeRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
     }
 }

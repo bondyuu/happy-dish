@@ -7,6 +7,7 @@ import com.happydish.backend.notice.repository.NoticeRepository;
 import com.happydish.backend.user.model.User;
 import com.happydish.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.weaver.ast.Not;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -43,5 +44,29 @@ public class NoticeService {
         Page<Notice> noticeList = noticeRepository.findAll(pageable);
 
         return ResponseEntity.ok(noticeList.map(Notice::toResponseDto));
+    }
+
+    @Transactional
+    public ResponseEntity<?> editNotice(long id, NoticeRequestDto requestDto, PrincipleDetails principleDetails) {
+        Optional<User> optionalUser = userRepository.findByEmail(principleDetails.getUser().getEmail());
+        if (optionalUser.isEmpty()) {
+            return ResponseEntity.badRequest().body("User Not Found");
+        }
+
+        User loginUser = optionalUser.get();
+        if (!loginUser.isAdmin()) {
+            return ResponseEntity.badRequest().body("Not Permitted");
+        }
+
+        Optional<Notice> optionalNotice = noticeRepository.findById(id);
+        if (optionalNotice.isEmpty()) {
+            return ResponseEntity.badRequest().body("Notice Not Found");
+        }
+
+        Notice target = optionalNotice.get();
+
+        target.edit(requestDto);
+
+        return ResponseEntity.ok(target.toResponseDto());
     }
 }

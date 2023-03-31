@@ -9,21 +9,30 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController("/notice")
+@RestController("/notices")
 @RequiredArgsConstructor
 public class NoticeController {
     private final NoticeService noticeService;
 
+    @PostMapping("/save")
     public ResponseEntity<?> saveNotice(@RequestBody NoticeRequestDto requestDto,
                                         @AuthenticationPrincipal PrincipleDetails principleDetails) {
 
         return noticeService.saveNotice(requestDto, principleDetails);
     }
 
+    @GetMapping()
     public ResponseEntity<?> getNotice(@PageableDefault(sort = "createdAt",direction = Sort.Direction.DESC) Pageable pageable){
         return noticeService.getNotice(pageable);
+    }
+
+
+    @PostMapping("/{noticeId}/edit")
+    public ResponseEntity<?> editNotice(@RequestBody NoticeRequestDto requestDto,
+                                        @PathVariable(name = "noticeId") long id,
+                                        @AuthenticationPrincipal PrincipleDetails principleDetails) {
+        return noticeService.editNotice(id, requestDto, principleDetails);
     }
 }

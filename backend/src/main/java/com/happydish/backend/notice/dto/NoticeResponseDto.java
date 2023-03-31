@@ -9,13 +9,15 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 public class NoticeResponseDto {
+    private long id;
     private String title;
     private String content;
     private String author;
     private LocalDateTime createdAt;
 
     @Builder
-    public NoticeResponseDto(String title, String content, LocalDateTime createdAt) {
+    public NoticeResponseDto(long id, String title, String content, LocalDateTime createdAt) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.author = "관리자";
