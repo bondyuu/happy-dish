@@ -42,6 +42,6 @@ public class NoticeService {
     public ResponseEntity<?> getNotice(Pageable pageable) {
         Page<Notice> noticeList = noticeRepository.findAll(pageable);
 
-        return ResponseEntity.ok(noticeList);
+        return ResponseEntity.ok(noticeList.map(Notice::toResponseDto));
     }
 }
