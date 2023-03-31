@@ -7,6 +7,8 @@ import com.happydish.backend.notice.repository.NoticeRepository;
 import com.happydish.backend.user.model.User;
 import com.happydish.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,5 +36,12 @@ public class NoticeService {
         Notice notice = noticeRepository.save(requestDto.toEntity());
 
         return ResponseEntity.ok(notice.toResponseDto());
+    }
+
+    @Transactional(readOnly = true)
+    public ResponseEntity<?> getNotice(Pageable pageable) {
+        Page<Notice> noticeList = noticeRepository.findAll(pageable);
+
+        return ResponseEntity.ok(noticeList);
     }
 }
