@@ -5,6 +5,7 @@ import com.happydish.backend.global.util.Timestamped;
 import com.happydish.backend.item.dto.EditRequestDto;
 import com.happydish.backend.item.dto.ItemDetailDto;
 import com.happydish.backend.item.dto.ItemDto;
+import com.happydish.backend.review.model.Review;
 import com.happydish.backend.user.model.Role;
 import com.happydish.backend.user.model.User;
 import lombok.Builder;
@@ -32,7 +33,7 @@ public class Item extends Timestamped {
     @Column
     private String imageUrl;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "item", orphanRemoval = true)
-    private List<Heart> heartList = new ArrayList<>();
+    private List<Review> reviewList = new ArrayList<>();
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "item", orphanRemoval = true)
     private List<CartItem> cartList = new ArrayList<>();
 
@@ -67,7 +68,7 @@ public class Item extends Timestamped {
                 .content(this.content)
                 .status(this.status.toString())
                 .imageUrl(this.imageUrl)
-                .heartNum(this.heartList.size())
+                .reviewNum(this.reviewList.size())
                 .createdAt(this.getCreatedAt())
                 .build();
     }
@@ -79,7 +80,7 @@ public class Item extends Timestamped {
                 .content(this.content)
                 .status(this.status.toString())
                 .imageUrl(this.imageUrl)
-                .heartNum(this.heartList.size())
+                .reviewNum(this.reviewList.size())
                 .createdAt(this.getCreatedAt())
                 .build();
     }

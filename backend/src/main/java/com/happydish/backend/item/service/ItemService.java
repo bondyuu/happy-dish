@@ -6,7 +6,7 @@ import com.happydish.backend.item.dto.EditRequestDto;
 import com.happydish.backend.item.dto.SaveRequestDto;
 import com.happydish.backend.item.model.Item;
 import com.happydish.backend.item.model.Status;
-import com.happydish.backend.item.repository.ItemRepository;
+import com.happydish.backend.review.repository.ItemRepository;
 import com.happydish.backend.user.model.Role;
 import com.happydish.backend.user.model.User;
 import com.happydish.backend.user.repository.UserRepository;

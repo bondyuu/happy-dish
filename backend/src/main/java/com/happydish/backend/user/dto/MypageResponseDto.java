@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class MypageResponseDto {
     private UserDto user;
-    private long heartNum;
+    private long reviewNum;
 
 }

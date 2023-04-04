@@ -2,7 +2,7 @@ package com.happydish.backend.user.model;
 
 import com.happydish.backend.cart.model.Cart;
 import com.happydish.backend.global.util.Timestamped;
-import com.happydish.backend.item.model.Heart;
+import com.happydish.backend.review.model.Review;
 import com.happydish.backend.item.model.Item;
 import com.happydish.backend.user.dto.UserDto;
 import com.sun.istack.NotNull;
@@ -53,7 +53,7 @@ public class User extends Timestamped {
     private String profileUrl;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
-    private List<Heart> heartList = new ArrayList<>();
+    private List<Review> reviewList = new ArrayList<>();
 
     @OneToOne(mappedBy = "user")
     private Cart cart;
