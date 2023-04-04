@@ -1,5 +1,6 @@
 package com.happydish.backend.item.model;
 
+import com.happydish.backend.cart.model.CartItem;
 import com.happydish.backend.global.util.Timestamped;
 import com.happydish.backend.item.dto.EditRequestDto;
 import com.happydish.backend.item.dto.ItemDetailDto;
@@ -32,6 +33,8 @@ public class Item extends Timestamped {
     private String imageUrl;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "item", orphanRemoval = true)
     private List<Heart> heartList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "item", orphanRemoval = true)
+    private List<CartItem> cartList = new ArrayList<>();
 
     @Builder
     public Item(String title, String content, User user, String url) {

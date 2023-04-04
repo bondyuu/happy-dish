@@ -1,5 +1,6 @@
 package com.happydish.backend.user.model;
 
+import com.happydish.backend.cart.model.Cart;
 import com.happydish.backend.global.util.Timestamped;
 import com.happydish.backend.item.model.Heart;
 import com.happydish.backend.item.model.Item;
@@ -53,6 +54,9 @@ public class User extends Timestamped {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
     private List<Heart> heartList = new ArrayList<>();
+
+    @OneToOne
+    private Cart cart;
 
     @Builder
     public User(String email, String name, String password, String provider, String providerId, String profileUrl) {
