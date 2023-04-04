@@ -55,11 +55,11 @@ public class User extends Timestamped {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
     private List<Heart> heartList = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne(mappedBy = "user")
     private Cart cart;
 
     @Builder
-    public User(String email, String name, String password, String provider, String providerId, String profileUrl) {
+    public User(String email, String name, String password, String provider, String providerId, String profileUrl, Cart cart) {
         this.email = email;
         this.name = name;
         this.password = password;
@@ -68,6 +68,7 @@ public class User extends Timestamped {
         this.role = Role.ROLE_USER;
         this.status = UserStatus.ACTIVE;
         this.profileUrl = profileUrl;
+        this.cart = cart;
     }
 
     public User(String email) {

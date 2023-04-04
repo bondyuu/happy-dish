@@ -1,5 +1,7 @@
 package com.happydish.backend.user.service;
 
+import com.happydish.backend.cart.model.Cart;
+import com.happydish.backend.cart.respository.CartRepository;
 import com.happydish.backend.global.auth.PrincipleDetails;
 import com.happydish.backend.global.util.S3Uploader;
 import com.happydish.backend.item.repository.HeartRepository;
@@ -25,6 +27,7 @@ public class UserService {
     private final S3Uploader s3Uploader;
     private final UserRepository userRepository;
     private final HeartRepository heartRepository;
+    private final CartRepository cartRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
@@ -41,6 +44,8 @@ public class UserService {
                         .build();
 
         userRepository.save(user);
+        Cart cart = new Cart(user);
+        cartRepository.save(cart);
         return ResponseEntity.ok("ok");
     }
 

@@ -1,5 +1,7 @@
 package com.happydish.backend.global.auth;
 
+import com.happydish.backend.cart.model.Cart;
+import com.happydish.backend.cart.respository.CartRepository;
 import com.happydish.backend.user.model.User;
 import com.happydish.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +19,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class PrincipleOauth2UserService extends DefaultOAuth2UserService {
-
+    private final CartRepository cartRepository;
     private final UserRepository userRepository;
 
     // 구글로부터 받은 userRequest 데이터에 대한 후처리되는 함수
@@ -46,6 +48,8 @@ public class PrincipleOauth2UserService extends DefaultOAuth2UserService {
                     .providerId(providerId)
                     .build();
             userRepository.save(user);
+            Cart cart = new Cart(user);
+            cartRepository.save(cart);
         } else {
             user = userEntity.get();
         }
