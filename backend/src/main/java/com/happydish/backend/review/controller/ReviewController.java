@@ -30,5 +30,10 @@ public class ReviewController {
                                        @PageableDefault(sort = "createdAt",direction = Sort.Direction.DESC) Pageable pageable) {
         return reviewService.getReviewByItem(id, pageable);
     }
-    
+
+    @PostMapping("/{reviewId}/delete")
+    public ResponseEntity<?> delReview(@PathVariable(name = "reviewId") long id,
+                                       @AuthenticationPrincipal PrincipleDetails principleDetails) {
+        return reviewService.delReview(id, principleDetails);
+    }
 }

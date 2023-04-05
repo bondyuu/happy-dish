@@ -87,6 +87,9 @@ public class User extends Timestamped {
     public boolean canNotControl(User target) {
         return target.getId() != this.id && !this.role.equals(Role.ROLE_ADMIN);
     }
+    public boolean canNotControl(Review target) {
+        return target.getUser() != this && !this.role.equals(Role.ROLE_ADMIN);
+    }
 
     public boolean canNotControl(Item target) {
         return !this.role.equals(Role.ROLE_ADMIN);

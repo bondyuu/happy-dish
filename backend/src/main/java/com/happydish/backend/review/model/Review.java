@@ -3,6 +3,7 @@ package com.happydish.backend.review.model;
 import com.happydish.backend.global.util.Timestamped;
 import com.happydish.backend.item.model.Item;
 import com.happydish.backend.item.model.Status;
+import com.happydish.backend.user.model.Role;
 import com.happydish.backend.user.model.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
+@Getter
 @NoArgsConstructor
 public class Review extends Timestamped {
     @Id
@@ -38,4 +40,14 @@ public class Review extends Timestamped {
         this.user = user;
         this.item = item;
     }
+
+    public void deletedBy(Role role){
+        if (role.equals(Role.ROLE_ADMIN)) {
+            this.status = ReviewStatus.ADMIN_DELETED;
+        } else {
+            this.status = ReviewStatus.USER_DELETED;
+        }
+    }
+
+
 }
