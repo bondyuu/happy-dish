@@ -11,7 +11,7 @@
 
     <b-card-text>{{ item.createdAt }}</b-card-text>
     <div>
-      <b-icon-heart/>{{item.heartNum}}
+      <b-icon-heart/>{{item.reviewNum}}
     </div>
   </b-card>
 </template>

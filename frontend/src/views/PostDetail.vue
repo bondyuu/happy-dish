@@ -6,7 +6,7 @@
     <div class="info-post">
       <span>{{post.title}}</span><br>
       <span>{{author.name}}</span><br>
-      <span>{{post.heartNum}}</span><br>
+      <span>{{post.reviewNum}}</span><br>
       <span>{{post.createdAt}}</span>
     </div>
   </div>
