@@ -3,6 +3,7 @@ package com.happydish.backend.review.model;
 import com.happydish.backend.global.util.Timestamped;
 import com.happydish.backend.item.model.Item;
 import com.happydish.backend.item.model.Status;
+import com.happydish.backend.review.dto.ReviewRequestDto;
 import com.happydish.backend.user.model.Role;
 import com.happydish.backend.user.model.User;
 import lombok.Builder;
@@ -49,5 +50,9 @@ public class Review extends Timestamped {
         }
     }
 
+    public void edit(ReviewRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+    }
 
 }

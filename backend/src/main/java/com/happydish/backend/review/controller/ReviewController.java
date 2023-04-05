@@ -36,4 +36,11 @@ public class ReviewController {
                                        @AuthenticationPrincipal PrincipleDetails principleDetails) {
         return reviewService.delReview(id, principleDetails);
     }
+
+    @PostMapping("/{reviewId}/edit")
+    public ResponseEntity<?> editReview(@PathVariable(name = "reviewId") long id,
+                                       @RequestBody ReviewRequestDto requestDto,
+                                       @AuthenticationPrincipal PrincipleDetails principleDetails) {
+        return reviewService.editReview(id, requestDto, principleDetails);
+    }
 }

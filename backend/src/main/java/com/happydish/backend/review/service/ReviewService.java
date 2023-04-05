@@ -85,4 +85,28 @@ public class ReviewService {
 
         return ResponseEntity.ok("ok");
     }
+
+    @Transactional
+    public ResponseEntity<?> editReview(long id, ReviewRequestDto requestDto, PrincipleDetails principleDetails) {
+        Optional<Review> optionalReview = reviewRepository.findById(id);
+        if (optionalReview.isEmpty()) {
+            return ResponseEntity.badRequest().body("Review Not Found");
+        }
+
+        Optional<User> optionalUser = userRepository.findByEmail(principleDetails.getUser().getEmail());
+        if (optionalUser.isEmpty()) {
+            return ResponseEntity.badRequest().body("User Not Found");
+        }
+
+        Review review = optionalReview.get();
+        User user = optionalUser.get();
+
+        if (user.canNotControl(review)) {
+            return ResponseEntity.badRequest().body("Not Permitted");
+        }
+
+        review.edit(requestDto);
+
+        return ResponseEntity.ok("ok");
+    }
 }
