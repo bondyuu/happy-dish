@@ -4,7 +4,7 @@ import com.happydish.backend.cart.model.Cart;
 import com.happydish.backend.cart.respository.CartRepository;
 import com.happydish.backend.global.auth.PrincipleDetails;
 import com.happydish.backend.global.util.S3Uploader;
-import com.happydish.backend.item.repository.ReviewRepository;
+import com.happydish.backend.review.repository.ReviewRepository;
 import com.happydish.backend.user.dto.EditRequestDto;
 import com.happydish.backend.user.dto.MypageResponseDto;
 import com.happydish.backend.user.dto.SignupRequestDto;

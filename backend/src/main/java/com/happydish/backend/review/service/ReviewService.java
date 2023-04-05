@@ -2,13 +2,14 @@ package com.happydish.backend.review.service;
 
 import com.happydish.backend.global.auth.PrincipleDetails;
 import com.happydish.backend.item.model.Item;
-import com.happydish.backend.item.repository.ReviewRepository;
+import com.happydish.backend.review.repository.ReviewRepository;
 import com.happydish.backend.review.dto.ReviewRequestDto;
 import com.happydish.backend.review.model.Review;
-import com.happydish.backend.review.repository.ItemRepository;
+import com.happydish.backend.item.repository.ItemRepository;
 import com.happydish.backend.user.model.User;
 import com.happydish.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,4 +45,14 @@ public class ReviewService {
         return ResponseEntity.ok("ok");
     }
 
+    @Transactional(readOnly = true)
+    public ResponseEntity<?> getReviewByItem(long id, Pageable pageable) {
+        Optional<Item> optionalItem = itemRepository.findById(id);
+        if (optionalItem.isEmpty()) {
+            return ResponseEntity.badRequest().body("Item Not Found");
+        }
+        Item item = optionalItem.get();
+
+        return ResponseEntity.ok(reviewRepository.findByItem(item, pageable));
+    }
 }

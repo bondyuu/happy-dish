@@ -1,4 +1,4 @@
-package com.happydish.backend.review.repository;
+package com.happydish.backend.item.repository;
 
 import com.happydish.backend.item.model.Item;
 import com.happydish.backend.item.model.Status;

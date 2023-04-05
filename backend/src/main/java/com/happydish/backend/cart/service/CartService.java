@@ -6,7 +6,7 @@ import com.happydish.backend.cart.respository.CartItemRepository;
 import com.happydish.backend.cart.respository.CartRepository;
 import com.happydish.backend.global.auth.PrincipleDetails;
 import com.happydish.backend.item.model.Item;
-import com.happydish.backend.review.repository.ItemRepository;
+import com.happydish.backend.item.repository.ItemRepository;
 import com.happydish.backend.user.model.User;
 import com.happydish.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
