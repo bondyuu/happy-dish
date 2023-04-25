@@ -4,8 +4,8 @@
       <h2>HAPDI</h2>
     </div>
     <nav class="nav-container">
-      <router-link to="/posts">게시글</router-link> |
-      <router-link to="/asdfasdf">게시글</router-link> |
+      <router-link to="/posts">상품보기</router-link> |
+      <router-link to="/asdfasdf">공지사항</router-link> |
       <router-link to="/asdf">게시글</router-link> |
       <router-link to="/my-page">마이페이지</router-link>
     </nav>
@@ -45,7 +45,7 @@ export default {
 }
 .nav-container {
   margin-left: 3%;
-  margin-right: 35%;
+  margin-right: 30%;
 }
 nav a {
   font-weight: bold;

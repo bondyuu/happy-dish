@@ -1,8 +1,8 @@
 package com.happydish.backend.cart.respository;
 
-import com.happydish.backend.cart.model.Cart;
-import com.happydish.backend.cart.model.CartItem;
-import com.happydish.backend.item.model.Item;
+import com.happydish.backend.cart.entity.Cart;
+import com.happydish.backend.cart.entity.CartItem;
+import com.happydish.backend.item.entity.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

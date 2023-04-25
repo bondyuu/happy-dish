@@ -1,6 +1,6 @@
 package com.happydish.backend.global.auth;
 
-import com.happydish.backend.user.model.User;
+import com.happydish.backend.user.entity.User;
 import com.happydish.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

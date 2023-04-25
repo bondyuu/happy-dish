@@ -1,7 +1,7 @@
-package com.happydish.backend.order.model;
+package com.happydish.backend.order.entity;
 
 import com.happydish.backend.global.util.Timestamped;
-import com.happydish.backend.item.model.Item;
+import com.happydish.backend.item.entity.Item;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 

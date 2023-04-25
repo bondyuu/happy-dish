@@ -1,20 +1,19 @@
 package com.happydish.backend.review.service;
 
 import com.happydish.backend.global.auth.PrincipleDetails;
-import com.happydish.backend.item.model.Item;
+import com.happydish.backend.item.entity.Item;
 import com.happydish.backend.review.repository.ReviewRepository;
 import com.happydish.backend.review.dto.ReviewRequestDto;
-import com.happydish.backend.review.model.Review;
+import com.happydish.backend.review.entity.Review;
 import com.happydish.backend.item.repository.ItemRepository;
-import com.happydish.backend.user.model.Role;
-import com.happydish.backend.user.model.User;
+import com.happydish.backend.user.entity.Role;
+import com.happydish.backend.user.entity.User;
 import com.happydish.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Optional;
 

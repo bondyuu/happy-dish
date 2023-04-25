@@ -1,8 +1,8 @@
 package com.happydish.backend.review.repository;
 
-import com.happydish.backend.item.model.Item;
-import com.happydish.backend.review.model.Review;
-import com.happydish.backend.user.model.User;
+import com.happydish.backend.item.entity.Item;
+import com.happydish.backend.review.entity.Review;
+import com.happydish.backend.user.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

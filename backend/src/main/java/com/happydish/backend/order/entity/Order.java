@@ -1,7 +1,7 @@
-package com.happydish.backend.order.model;
+package com.happydish.backend.order.entity;
 
 import com.happydish.backend.global.util.Timestamped;
-import com.happydish.backend.user.model.User;
+import com.happydish.backend.user.entity.User;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "orders")
 @NoArgsConstructor
 public class Order extends Timestamped {
     @Id

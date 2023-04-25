@@ -3,7 +3,7 @@ package com.happydish.backend.user;
 import com.happydish.backend.global.auth.PrincipleDetails;
 import com.happydish.backend.user.dto.EditRequestDto;
 import com.happydish.backend.user.dto.SignupRequestDto;
-import com.happydish.backend.user.model.User;
+import com.happydish.backend.user.entity.User;
 import com.happydish.backend.user.repository.UserRepository;
 import com.happydish.backend.user.service.UserService;
 import org.junit.jupiter.api.DisplayName;

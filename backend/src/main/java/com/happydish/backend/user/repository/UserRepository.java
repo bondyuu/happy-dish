@@ -1,6 +1,6 @@
 package com.happydish.backend.user.repository;
 
-import com.happydish.backend.user.model.User;
+import com.happydish.backend.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

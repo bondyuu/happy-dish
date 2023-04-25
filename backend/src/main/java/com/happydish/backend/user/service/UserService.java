@@ -1,6 +1,6 @@
 package com.happydish.backend.user.service;
 
-import com.happydish.backend.cart.model.Cart;
+import com.happydish.backend.cart.entity.Cart;
 import com.happydish.backend.cart.respository.CartRepository;
 import com.happydish.backend.global.auth.PrincipleDetails;
 import com.happydish.backend.global.util.S3Uploader;
@@ -8,8 +8,8 @@ import com.happydish.backend.review.repository.ReviewRepository;
 import com.happydish.backend.user.dto.EditRequestDto;
 import com.happydish.backend.user.dto.MypageResponseDto;
 import com.happydish.backend.user.dto.SignupRequestDto;
-import com.happydish.backend.user.model.Role;
-import com.happydish.backend.user.model.User;
+import com.happydish.backend.user.entity.Role;
+import com.happydish.backend.user.entity.User;
 import com.happydish.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

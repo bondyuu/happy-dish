@@ -1,7 +1,7 @@
 package com.happydish.backend.item.repository;
 
-import com.happydish.backend.item.model.Item;
-import com.happydish.backend.item.model.Status;
+import com.happydish.backend.item.entity.Item;
+import com.happydish.backend.item.entity.Status;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

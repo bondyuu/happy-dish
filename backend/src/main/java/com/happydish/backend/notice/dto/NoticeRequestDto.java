@@ -1,6 +1,6 @@
 package com.happydish.backend.notice.dto;
 
-import com.happydish.backend.notice.model.Notice;
+import com.happydish.backend.notice.entity.Notice;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

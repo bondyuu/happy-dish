@@ -2,8 +2,7 @@ package com.happydish.backend.global.auth.jwt;
 
 import com.happydish.backend.global.auth.PrincipleDetails;
 import com.happydish.backend.user.dto.TokenDto;
-import com.happydish.backend.user.model.Role;
-import com.happydish.backend.user.model.User;
+import com.happydish.backend.user.entity.User;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

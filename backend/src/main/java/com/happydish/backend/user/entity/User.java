@@ -1,9 +1,9 @@
-package com.happydish.backend.user.model;
+package com.happydish.backend.user.entity;
 
-import com.happydish.backend.cart.model.Cart;
+import com.happydish.backend.cart.entity.Cart;
 import com.happydish.backend.global.util.Timestamped;
-import com.happydish.backend.review.model.Review;
-import com.happydish.backend.item.model.Item;
+import com.happydish.backend.review.entity.Review;
+import com.happydish.backend.item.entity.Item;
 import com.happydish.backend.user.dto.UserDto;
 import com.sun.istack.NotNull;
 import lombok.Builder;

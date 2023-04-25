@@ -2,12 +2,11 @@ package com.happydish.backend.notice.service;
 
 import com.happydish.backend.global.auth.PrincipleDetails;
 import com.happydish.backend.notice.dto.NoticeRequestDto;
-import com.happydish.backend.notice.model.Notice;
+import com.happydish.backend.notice.entity.Notice;
 import com.happydish.backend.notice.repository.NoticeRepository;
-import com.happydish.backend.user.model.User;
+import com.happydish.backend.user.entity.User;
 import com.happydish.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Not;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

@@ -1,12 +1,10 @@
 package com.happydish.backend.global.auth;
 
-import com.happydish.backend.cart.model.Cart;
+import com.happydish.backend.cart.entity.Cart;
 import com.happydish.backend.cart.respository.CartRepository;
-import com.happydish.backend.user.model.User;
+import com.happydish.backend.user.entity.User;
 import com.happydish.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;

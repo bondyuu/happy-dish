@@ -1,17 +1,16 @@
 package com.happydish.backend.order.service;
 
 import com.happydish.backend.global.auth.PrincipleDetails;
-import com.happydish.backend.item.model.Item;
+import com.happydish.backend.item.entity.Item;
 import com.happydish.backend.item.repository.ItemRepository;
 import com.happydish.backend.order.dto.OrderRequestDto;
-import com.happydish.backend.order.model.Order;
-import com.happydish.backend.order.model.OrderItem;
+import com.happydish.backend.order.entity.Order;
+import com.happydish.backend.order.entity.OrderItem;
 import com.happydish.backend.order.repository.OrderItemRepository;
 import com.happydish.backend.order.repository.OrderRepository;
-import com.happydish.backend.user.model.User;
+import com.happydish.backend.user.entity.User;
 import com.happydish.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

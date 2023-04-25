@@ -1,4 +1,4 @@
-package com.happydish.backend.review.model;
+package com.happydish.backend.review.entity;
 
 import lombok.Getter;
 

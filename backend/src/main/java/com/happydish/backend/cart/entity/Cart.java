@@ -1,6 +1,6 @@
-package com.happydish.backend.cart.model;
+package com.happydish.backend.cart.entity;
 
-import com.happydish.backend.user.model.User;
+import com.happydish.backend.user.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

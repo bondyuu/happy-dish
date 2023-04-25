@@ -1,6 +1,6 @@
 package com.happydish.backend.global.auth;
 
-import com.happydish.backend.user.model.User;
+import com.happydish.backend.user.entity.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

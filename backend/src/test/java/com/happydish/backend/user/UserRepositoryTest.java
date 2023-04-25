@@ -1,9 +1,9 @@
 package com.happydish.backend.user;
 
 
-import com.happydish.backend.user.model.Role;
-import com.happydish.backend.user.model.User;
-import com.happydish.backend.user.model.UserStatus;
+import com.happydish.backend.user.entity.Role;
+import com.happydish.backend.user.entity.User;
+import com.happydish.backend.user.entity.UserStatus;
 import com.happydish.backend.user.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,11 +1,10 @@
-package com.happydish.backend.review.model;
+package com.happydish.backend.review.entity;
 
 import com.happydish.backend.global.util.Timestamped;
-import com.happydish.backend.item.model.Item;
-import com.happydish.backend.item.model.Status;
+import com.happydish.backend.item.entity.Item;
 import com.happydish.backend.review.dto.ReviewRequestDto;
-import com.happydish.backend.user.model.Role;
-import com.happydish.backend.user.model.User;
+import com.happydish.backend.user.entity.Role;
+import com.happydish.backend.user.entity.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

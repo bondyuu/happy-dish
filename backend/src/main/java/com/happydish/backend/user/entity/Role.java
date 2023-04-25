@@ -1,4 +1,4 @@
-package com.happydish.backend.user.model;
+package com.happydish.backend.user.entity;
 
 import lombok.Getter;
 

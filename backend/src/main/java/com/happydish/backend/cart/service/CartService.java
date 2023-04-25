@@ -1,13 +1,13 @@
 package com.happydish.backend.cart.service;
 
-import com.happydish.backend.cart.model.Cart;
-import com.happydish.backend.cart.model.CartItem;
+import com.happydish.backend.cart.entity.Cart;
+import com.happydish.backend.cart.entity.CartItem;
 import com.happydish.backend.cart.respository.CartItemRepository;
 import com.happydish.backend.cart.respository.CartRepository;
 import com.happydish.backend.global.auth.PrincipleDetails;
-import com.happydish.backend.item.model.Item;
+import com.happydish.backend.item.entity.Item;
 import com.happydish.backend.item.repository.ItemRepository;
-import com.happydish.backend.user.model.User;
+import com.happydish.backend.user.entity.User;
 import com.happydish.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

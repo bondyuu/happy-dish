@@ -1,4 +1,4 @@
-package com.happydish.backend.order.model;
+package com.happydish.backend.order.entity;
 
 import lombok.Getter;
 

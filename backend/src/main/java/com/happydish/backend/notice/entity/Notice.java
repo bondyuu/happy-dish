@@ -1,4 +1,4 @@
-package com.happydish.backend.notice.model;
+package com.happydish.backend.notice.entity;
 
 
 import com.happydish.backend.global.util.Timestamped;
